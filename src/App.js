@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React, { useState } from 'react';
+import Calculator from './Calculator';
+import PeterNumberCalculator from './PeterNumberCalculator';
+import Menu from './Menu';
 
-function App() {
+const App = () => {
+  const [selectedComponent, setSelectedComponent] = useState(null);
+
+  const handleSelectCalculator = () => {
+    setSelectedComponent('calculator');
+  };
+
+  const handleSelectPeterNumberCalculator = () => {
+    setSelectedComponent('peterNumberCalculator');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={styles.appContainer}>
+      <Menu
+        onSelectCalculator={handleSelectCalculator}
+        onSelectPeterNumberCalculator={handleSelectPeterNumberCalculator}
+      />
+      {selectedComponent === 'calculator' && <Calculator />}
+      {selectedComponent === 'peterNumberCalculator' && <PeterNumberCalculator />}
     </div>
   );
-}
+};
+ 
+const styles = {
+  appContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    flexDirection: 'column',
+  },
+};
 
 export default App;
